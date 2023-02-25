@@ -1,22 +1,46 @@
-
-function formatDate (dataObject) {
-  const parts={
-  month:dataObject.getMonth()+1,
-  date:dataObject.getDate().toString().padStart(2, "0"),
-  year:dataObject.getFullYear(),
-};
-return  `${parts.date}/${parts.month}/${parts.year}`
-} 
-const myDate= new Date();
-const myDateFormatted=formatDate(myDate)
-document.getElementById("span1").innerHTML=myDateFormatted
-document.getElementById("span2").innerHTML=myDateFormatted
-document.getElementById("span3").innerHTML=myDateFormatted
-document.getElementById("span4").innerHTML=myDateFormatted
+const date1 = document.getElementById('date1');
+const date2 = document.getElementById('date2');
+const date3 = document.getElementById('date3');
+const date4 = document.getElementById('date4');
+const timer = document.getElementById('timer-content');
 
 
+function dateFormatted () {
+    const date = new Date();
 
-// const dayJsObject = dayjs();
+    const year = date.getFullYear();
+    let month = 1 + date.getMonth();
+    let day = date.getDate();
 
-// const el=document.getElementById(span1)
-// el.innerHTML=dayJsObject.format("DD/MM/YYYY")
+    if (month < 10) {
+        month = '0' + month;
+    } 
+    if (day < 10) {
+        day = '0' +day;
+    }
+    return `${day}/${month}/${year}`;
+}
+
+date1.innerHTML = dateFormatted();
+date2.innerHTML = dateFormatted();
+date3.innerHTML = dateFormatted();
+date4.innerHTML = dateFormatted();
+
+let minutes = 0;
+let seconds = 0;
+
+setInterval(() => {
+seconds ++;
+if (seconds == 60){
+    minutes ++;
+    seconds = 0
+}
+
+let formattedTime= (minutes < 10 ?  '0' + minutes : minutes) + ':' 
++ (seconds < 10 ? '0' + seconds : seconds);
+    
+
+timer.innerHTML = formattedTime
+}, 1000) 
+
+
